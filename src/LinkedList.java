@@ -50,6 +50,31 @@ class LinkList {
         }
         return false;
     }
+    void deleteNode(int key)
+    {
+        // Store head node
+        Node temp = head, prev = null;
+
+        // If head node itself holds the key to be deleted
+        if (temp != null && temp.data == key) {
+            head = temp.next; // Changed head
+            return;
+        }
+
+        // Search for the key to be deleted, keep track of
+        // the previous node as we need to change temp.next
+        while (temp != null && temp.data != key) {
+            prev = temp;
+            temp = temp.next;
+        }
+
+        // If key was not present in linked list
+        if (temp == null)
+            return;
+
+        // Unlink the node from linked list
+        prev.next = temp.next;
+    }
     public static void main(String args[]){
         LinkList linkList = new LinkList();
         linkList.insert(22);
@@ -60,5 +85,7 @@ class LinkList {
         System.out.println("From start");
         linkList.printFromStart();
         System.out.println(linkList.search(linkList.head, 22));
+        linkList.deleteNode(2222);
+        linkList.print();
     }
 }
